@@ -115,14 +115,30 @@ public class NumberTriangle {
         // will need to return the top of the NumberTriangle,
         // so might want a variable for that.
         NumberTriangle top = null;
+        NumberTriangle[] prevRow = null;
 
         String line = br.readLine();
         while (line != null) {
 
-            // remove when done; this line is included so running starter code prints the contents of the file
-            System.out.println(line);
 
             // TODO process the line
+            String[] nums = line.split("\\s");
+            NumberTriangle[] currRow = new NumberTriangle[nums.length];
+
+            for (int i = 0; i < nums.length; i++) {
+                currRow[i] = new NumberTriangle(Integer.parseInt(nums[i])); // add node to become the new root nodes
+            }
+
+            if (top == null) {
+                top = currRow[0];  // set the root node to be top
+            } else {
+                for (int i = 0; i < prevRow.length; i++) {
+                    prevRow[i].setLeft(currRow[i]);
+                    prevRow[i].setRight(currRow[i + 1]);
+                }
+            }
+
+            prevRow = currRow;
 
             //read the next line
             line = br.readLine();
