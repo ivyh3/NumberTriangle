@@ -89,7 +89,13 @@ public class NumberTriangle {
      */
     public int retrieve(String path) {
         // TODO implement this method
-        return -1;
+        if (path.isEmpty()) {
+            return this.getRoot();
+        } else if (path.charAt(0) == 'l'){
+            return this.left.retrieve(path.substring(1));
+        } else {
+            return this.right.retrieve(path.substring(1));
+        }
     }
 
     /** Read in the NumberTriangle structure from a file.
@@ -110,7 +116,7 @@ public class NumberTriangle {
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
 
 
-        // TODO define any variables that you want to use to store things
+        // define any variables that you want to use to store things
 
         // will need to return the top of the NumberTriangle,
         // so might want a variable for that.
@@ -121,7 +127,7 @@ public class NumberTriangle {
         while (line != null) {
 
 
-            // TODO process the line
+            // process the line
             String[] nums = line.split("\\s");
             NumberTriangle[] currRow = new NumberTriangle[nums.length];
 
